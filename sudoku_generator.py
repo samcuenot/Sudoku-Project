@@ -27,6 +27,7 @@ class SudokuGenerator:
         self.removed_cells = removed_cells
         self.board = [[0 for _ in range(row_length)] for _ in range(row_length)]
         self.box_length = int(math.sqrt(row_length))
+        self.example = 2
 
 
     '''
