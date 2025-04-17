@@ -25,7 +25,7 @@ class SudokuGenerator:
     def __init__(self, row_length, removed_cells):
         self.row_length = row_length
         self.removed_cells = removed_cells
-        self.board = [[0 for _ in range(row_length)] for _ in range(row_length)]
+        self.board = [[0 for i in range(row_length)] for j in range(9)]
         self.box_length = int(math.sqrt(row_length))
 
     '''
@@ -35,7 +35,7 @@ class SudokuGenerator:
 	Return: list[list]
     '''
     def get_board(self):
-        return self.board
+        return [[self.board[j][i] for i in range(self.row_length)] for j in range(9)]
 
     '''
 	Displays the board to the console
@@ -45,7 +45,8 @@ class SudokuGenerator:
 	Return: None
     '''
     def print_board(self):
-        pass
+        for row in self.board:
+            print(row)
 
     '''
 	Determines if num is contained in the specified row (horizontal) of the board
@@ -188,7 +189,14 @@ class SudokuGenerator:
 	Return: None
     '''
     def remove_cells(self):
-        pass
+        for i in range(self.removed_cells):
+            while True:
+                row, col = random.randint(0, 8), random.randint(0, 8)
+                if self.board[row][col] == 0:
+                    continue
+                else:
+                    self.board[row][col] = 0
+                    break
 
 
 
@@ -216,12 +224,16 @@ def generate_sudoku(size, removed):
     return board
 
 
+
+
+#CELL CLASS ---------------------------------------------------------------------------------
 class Cell:
     def __init__(self, value, row, col, screen):
         self.value = value
         self.row = row
         self.col = col
         self.screen = screen
+        self.sketched_value = None
 
     def set_cell_value(self, value):
         self.value = value
@@ -232,6 +244,10 @@ class Cell:
     def draw(self):
         pass
 
+
+
+
+#BOARD CLASS ---------------------------------------------------------------------------------
 class Board:
     def __init__(self,width,height,screen,difficulty):
         self.width = width
