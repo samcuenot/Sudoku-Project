@@ -256,11 +256,20 @@ class Board:
         self.difficulty = difficulty
     def draw(self):
         pass
+
     def select(self,row,col):
         self.row = row
         self.col = col
+        self.selected_cell = (row,col)
+        for r in range(9):
+            for c in range(9):
+                self.cells[r][c].selected = (r == row and c == col)
     def click(self, row, col):
-        pass
+        if 0<=x<=self.width and 0<=y<=self.height:
+            row //= 60
+            col //= 60
+            return int(row), int(col)
+        return None
     def clear(self):
         pass
     def sketch(self,value):
